@@ -34,6 +34,7 @@ function App() {
         const res = await fetch(`${getBackendURL()}/api/projects`, {
           headers: {
             'X-Tenant-Slug': subdomain,
+            'ngrok-skip-browser-warning': 'true',
           },
         });
 
