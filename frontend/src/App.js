@@ -8,9 +8,13 @@ const getSubdomain = () => {
 };
 
 const getBackendURL = () => {
-  // Use environment variable if available
-  return import.meta.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+  const url = process.env.REACT_APP_BACKEND_URL;
+  if (!url) {
+    console.error("❌ Missing REACT_APP_BACKEND_URL. Check your Vercel settings.");
+  }
+  return url || "http://localhost:5000"; // fallback for local dev
 };
+
 
 function App() {
   const subdomain = getSubdomain();
