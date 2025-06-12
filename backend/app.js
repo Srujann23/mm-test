@@ -10,15 +10,10 @@ const app = express();
 connectDB();
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || /\.themeasuremate\.com$/.test(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS denied"));
-    }
-  },
-  credentials: true,
+  origin: '*', // Allow all origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
+
 
 app.use(express.json());
 

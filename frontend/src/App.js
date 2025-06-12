@@ -11,7 +11,7 @@ const getSubdomain = () => {
 
 // Utility to get the backend URL (change to your real backend)
 const getBackendURL = () => {
-  return `https://api.themeasuremate.co`; // Replace with your backend base URL
+  return `http://localhost:5000`; // Replace with your backend base URL
 };
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
 
     fetchTenant();
   }, [subdomain]);
-
+  
   if (loading) return <div>Loading...</div>;
 
   // Fallback: Default "Measuremate" homepage

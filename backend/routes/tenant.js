@@ -3,6 +3,8 @@ const Tenant = require('../models/Tenant');
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
+  console.log("REGISTER HIT:", req.body); // ← add this
+
   const { slug, appName, tagline, colorScheme, logoUrl } = req.body;
 
   if (!slug || !appName)

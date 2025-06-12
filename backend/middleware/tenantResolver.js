@@ -1,17 +1,14 @@
-const Tenant = require('../models/Tenant');
+module.exports = async function tenantResolver(req, res, next) {
+  console.log("Tenant middleware hit → URL:", req.originalUrl);
 
-module.exports = async (req, res, next) => {
-  const host = req.headers.host?.split(':')[0];
-  const slug = host.split('.')[0]; // Get subdomain
+  const subdomain = getSubdomain(req.hostname);
+  console.log("Resolved subdomain:", subdomain);
 
-  try {
-    const tenant = await Tenant.findOne({ slug });
-    if (!tenant) return res.status(404).json({ error: "Tenant not found" });
+  if (!subdomain) return res.status(400).json({ error: 'No subdomain provided' });
 
-    req.tenant = tenant;
-    next();
-  } catch (err) {
-    console.error("Tenant resolution error:", err);
-    res.status(500).json({ error: "Server Error" });
-  }
+  const tenant = await Tenant.findOne({ slug: subdomain });
+  if (!tenant) return res.status(404).json({ error: 'Tenant not found' });
+
+  req.tenant = tenant;
+  next();
 };
