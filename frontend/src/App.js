@@ -9,7 +9,7 @@ const getSubdomain = () => {
 
 const getBackendURL = () => {
   // Use environment variable if available
-  return import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+  return import.meta.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
 };
 
 function App() {
