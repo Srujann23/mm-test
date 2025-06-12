@@ -1,14 +1,11 @@
-// utils/getSubdomain.js
-module.exports = function getSubdomain(hostname) {
-  if (!hostname) return null;
+function getSubdomain(hostname) {
+  if (!hostname || hostname === 'localhost') return null;
 
-  // Remove port if any (for localhost)
-  hostname = hostname.split(':')[0];
-
-  // Remove the main domain from the end
   const parts = hostname.split('.');
-  if (parts.length < 3) return null;
+  if (parts.length > 2) {
+    return parts[0]; // e.g., client1.themeasuremate.co → "client1"
+  }
 
-  // For domains like client1.themeasuremate.co → return 'client1'
-  return parts[0];
-};
+  return null; // No subdomain
+}
+module.exports = getSubdomain;

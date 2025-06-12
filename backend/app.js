@@ -4,6 +4,7 @@ const connectDB = require('./config/db');
 const tenantResolver = require('./middleware/tenantResolver');
 const tenantRoutes = require('./routes/tenant');
 const projectRoutes = require('./routes/projects');
+const morgan = require('morgan')
 require('dotenv').config();
 
 const app = express();
@@ -16,7 +17,7 @@ app.use(cors({
 
 
 app.use(express.json());
-
+app.use(morgan())
 // Public routes
 app.use('/api/tenant', tenantRoutes);
 

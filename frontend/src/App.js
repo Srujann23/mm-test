@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-// Utility to extract subdomain from current hostname
 const getSubdomain = () => {
   const host = window.location.hostname;
   const parts = host.split('.');
-  // e.g. [client1, themeasuremate, co]
   if (parts.length < 3) return null;
   return parts[0];
 };
 
-// Utility to get the backend URL (change to your real backend)
 const getBackendURL = () => {
-  return `http://localhost:5000`; // Replace with your backend base URL
+  // Use environment variable if available
+  return import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 };
 
 function App() {
@@ -31,7 +29,7 @@ function App() {
       try {
         const res = await fetch(`${getBackendURL()}/api/projects`, {
           headers: {
-            'X-Tenant-Subdomain': subdomain,
+            'X-Tenant-Slug': subdomain,
           },
         });
 
@@ -39,6 +37,7 @@ function App() {
         const data = await res.json();
         setTenant(data);
       } catch (error) {
+        console.error('Fetch tenant failed:', error);
         setIsTenantFound(false);
       } finally {
         setLoading(false);
@@ -47,10 +46,9 @@ function App() {
 
     fetchTenant();
   }, [subdomain]);
-  
+
   if (loading) return <div>Loading...</div>;
 
-  // Fallback: Default "Measuremate" homepage
   if (!isTenantFound) {
     return (
       <div style={{ textAlign: 'center', padding: '2rem', backgroundColor: '#f8f8f8' }}>
@@ -65,7 +63,6 @@ function App() {
     );
   }
 
-  // Tenant-specific UI
   return (
     <div style={{ padding: '2rem', backgroundColor: tenant.color || '#ffffff' }}>
       <h1>{tenant.appName || 'Unnamed App'}</h1>
