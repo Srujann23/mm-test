@@ -82,7 +82,12 @@ function App() {
         <img
           src={tenant.logo}
           alt="Tenant Logo"
-          style={{ marginTop: '1rem', maxHeight: '100px' }}
+          style={{
+            marginTop: '1rem',
+            borderRadius: '8px',
+            width: '150px', // You can change this value
+            height: 'auto',  // Maintains aspect ratio
+          }}
         />
       )}
     </div>
