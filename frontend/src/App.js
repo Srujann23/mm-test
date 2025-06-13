@@ -62,8 +62,14 @@ function App() {
         <img
           src="https://themeasuremate.com/images/measuremate-light-logo1.png"
           alt="Measuremate Logo"
-          style={{ marginTop: '1rem', borderRadius: '8px' }}
+          style={{
+            marginTop: '1rem',
+            borderRadius: '8px',
+            width: '150px', // You can change this value
+            height: 'auto',  // Maintains aspect ratio
+          }}
         />
+
       </div>
     );
   }
