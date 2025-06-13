@@ -60,7 +60,7 @@ function App() {
         <h1>Welcome to <strong>Measuremate</strong></h1>
         <p>Your data visualization assistant</p>
         <img
-          src="https://picsum.photos/id/237/200/300"
+          src="https://themeasuremate.com/images/measuremate-light-logo1.png"
           alt="Measuremate Logo"
           style={{ marginTop: '1rem', borderRadius: '8px' }}
         />
